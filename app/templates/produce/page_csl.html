@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>采收量</title>
+    <link href="/static/field/bootstrap.min.css" rel="stylesheet">
+	<script src="/static/field/jquery.min.js"></script>
+	<script src="/static/field/bootstrap.min.js"></script>
+
+    
+    <link href="/static/field/main.css" rel="stylesheet">
+    <link href="/static/field/page.css" rel="stylesheet">
+    <script src="/static/field/datenl.js"></script>
+    <script src="/static/field/page.js"></script>
+    
+    <link href="/static/field/bootstrap-treeview.css" rel="stylesheet">
+    <script src="/static/field/bootstrap-treeview.js"></script>
+    
+    <script type="text/javascript" src="/static/field/highcharts.js"></script>
+	<script type="text/javascript" src="/static/field/highcharts-3d.js"></script>
+	
+    <link href="/static/field/list/sandbox.css" rel="stylesheet">
+    <link href="/static/field/list/drawer.min.css" rel="stylesheet">
+	<script src="/static/field/list/iscroll.min.js"></script>
+	<script src="/static/field/list/drawer.min.js" charset="utf-8"></script>
+    
+<script>
+    $(document).ready(function() {
+      $('.drawer').drawer();
+    });
+</script>
+<script type="text/javascript">
+	
+	document.onmousemove=function(e)
+	{
+		if(e.screenX==0)
+			$('#showlist').click();
+	}
+	function aaa(event)
+	{
+		var div=document.getElementById("test");
+		var x=event.clientX;
+		var divx=div.offsetWidth;
+		if(x>divx)
+			$('#showlist').click();
+	}
+	window.onload=function()
+	{
+		document.getElementById("daterq").innerHTML=showDate();
+		Mk_Csl("csl",{{csl}});
+		
+		var data={{series}};
+		var xdata={{categories|safe}};
+		LoadSlt('csl',xdata,data);
+	}
+	$(document).ready(function(){
+		//$('#test').BootSideMenu({side:"left",autoClose:true});
+		var options={
+			levels: 5,
+			color:'white',
+			backColor:'#1f2229',
+			showBorder:false,
+			onhoverColor:'#666666',
+			data: buildDomTree(),
+			onNodeSelected:function(event,node){
+              //alert("选择了:"+node.text);
+              var url_host = "http://"+window.location.host;
+              var url_search = window.location.search
+              if(node.text=="主页")
+              {
+                window.location.href=url_host+"/"+url_search;
+              }
+              if(node.text=="损耗")
+              {
+                window.location.href=url_host+"/loss_index"+url_search;
+              }
+            },
+			onNodeExpanded:function(event,node){
+              //alert("展开了:"+node.text);
+            }
+        };
+		$('#treeview').treeview(options);
+        //$('#treeview').treeview('collapseAll',{silent:true,ignoreChildren:false});
+	});
+	
+	function buildDomTree()
+	{
+		var defaultData=[{text:'主页',nodes:[
+			{text:'销售量'},
+			{text:'损耗'},
+			{text:'物流'},
+			{text:'管控'},
+			{text:'气象'}
+		]}];
+        return defaultData;
+	}
+	function Fxlx(type)
+	{
+	    console.log(type);
+	    $.getJSON('/product_chart', {
+            param: type,
+            type: 'csl',
+            time:getQueryString("time")
+            }, function(data) {
+                var categories = data.categories.split(",");
+                var ser_str = data.series.split(",");
+                var series = new Array();
+                for(s in ser_str)
+                {
+                    series.push(parseFloat(ser_str[s]));
+                }
+                console.log(series);
+                LoadSlt(type,categories,series);
+        });
+	    //var cate = ['根茎类','果菜'];
+	    //var ser = [111,222];
+		//LoadSlt(type,cate,ser);
+	}
+	function Kcllx(type)
+	{
+	    var val = "";
+	    console.log(type);
+	    	switch(type)
+	{
+		case "csl":
+			val = "{{csl}}";
+			break;
+		case "ckl":
+			val = "{{ckl}}";
+			break;
+		case "jpckc":
+			val = "{{jpckc}}";
+			break;
+		case "spckc":
+			val = "{{spckc}}";
+			break;
+		case "yjcc":
+			val ="{{yjccl}}";
+			break;
+	}
+		Mk_Csl(type,val);
+	}
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+</script>
+</head>
+<body>
+<div class="drawer drawer--left">
+  <header role="banner">
+    <button type="button" class="drawer-toggle" style="background:transparent;color:white; display:none;" id="showlist"></button>
+    <!--<button type="button" class="drawer-toggle drawer-hamburger" style="background:white;">>></button>-->
+    <div class="drawer-nav" role="navigation" id="test" style="opacity:0.98; background:#1f2229; padding:0px 0px;" onMouseOut="aaa(event);">
+		<div id="treeview" style="color:white;"></div>
+    </div>
+  </header>
+</div>
+<br>
+	<div class="div-title">
+        <table style="width:100%;"><tr>
+            <td style="min-width:50%;text-align:left;"><img src="/static/images/logo.png" class="logo"/></td>
+            <td style="min-width:50%;text-align:right;"><span class="div-title-right" id="daterq"></span></td></tr>
+        </table>
+    </div>
+    <div class="div-mk page-1-topmk" id="div_csl">
+    	<table class="page-1-topmk-table"><tr>
+    	<td>
+        	<span class="page-1-top-leftmk-font-1">采收量</span>
+            <span class="page-1-top-leftmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt0}}" class="bigimg"/>
+        	<br>
+        	<span class="page-1-top-leftmk-font-3">{{csl}}</span>
+        </td>
+        <td style="padding:0% 3% 0% 5%;">
+        	<div class="fengexian1"></div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('ckl');">
+            <span class="page-1-top-rightmk-font-1">出库量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt1}}" class="midimg1"/>
+            <br>
+            <span class="page-1-top-rightmk-font-3">{{ckl}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('jpckc');">
+        	<span class="page-1-top-rightmk-font-1">精品菜库存量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt2}}" class="midimg"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{jpckc}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('spckc');">
+        	<span class="page-1-top-rightmk-font-1">商品菜库存量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt3}}" class="midimg"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{spckc}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('yjcc');">
+        	<span class="page-1-top-rightmk-font-1">预计出菜量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt4}}" class="midimg"/>
+            <span class="page-1-top-rightmk-font-1">　</span>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{yjccl}}</span>
+        </div>
+        </td>
+        </tr></table>
+    </div>
+    <div class="div-mk page-1-topmk" id="div_ckl">
+    	<table class="page-1-topmk-table"><tr>
+    	<td>
+        	<span class="page-1-top-leftmk-font-1">出库量</span>
+            <span class="page-1-top-leftmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt1}}" class="bigimg"/>
+        	<br>
+        	<span class="page-1-top-leftmk-font-3">{{ckl}}</span>
+        </td>
+        <td style="padding:0% 3% 0% 5%;">
+        	<div class="fengexian1"></div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('csl');">
+            <span class="page-1-top-rightmk-font-1">采收量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt0}}" class="midimg1"/>
+            <br>
+            <span class="page-1-top-rightmk-font-3">{{csl}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('jpckc');">
+        	<span class="page-1-top-rightmk-font-1">精品菜库存量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt2}}" class="midimg"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{jpckc}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('spckc');">
+        	<span class="page-1-top-rightmk-font-1">商品菜库存量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt3}}" class="midimg"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{spckc}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('yjcc');">
+        	<span class="page-1-top-rightmk-font-1">预计出菜量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt4}}" class="midimg"/>
+            <span class="page-1-top-rightmk-font-1">　</span>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{yjccl}}</span>
+        </div>
+        </td>
+        </tr></table>
+    </div>
+    <div class="div-mk page-1-topmk" id="div_jpckc">
+    	<table class="page-1-topmk-table"><tr>
+    	<td>
+        	<span class="page-1-top-leftmk-font-1">精品菜库存量</span>
+            <span class="page-1-top-leftmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt2}}" class="bigimg"/>
+        	<br>
+        	<span class="page-1-top-leftmk-font-3">{{jpckc}}</span>
+        </td>
+        <td style="padding:0% 3% 0% 5%;">
+        	<div class="fengexian1"></div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('csl');">
+            <span class="page-1-top-rightmk-font-1">采收量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt0}}" class="midimg1"/>
+            <br>
+            <span class="page-1-top-rightmk-font-3">{{csl}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('ckl');">
+        	<span class="page-1-top-rightmk-font-1">出库量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt1}}" class="midimg1"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{ckl}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('spckc');">
+        	<span class="page-1-top-rightmk-font-1">商品菜库存量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt3}}" class="midimg"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{spckc}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('yjcc');">
+        	<span class="page-1-top-rightmk-font-1">预计出菜量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt4}}" class="midimg"/>
+            <span class="page-1-top-rightmk-font-1">　</span>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{yjccl}}</span>
+        </div>
+        </td>
+        </tr></table>
+    </div>
+    <div class="div-mk page-1-topmk" id="div_spckc">
+    	<table class="page-1-topmk-table"><tr>
+    	<td>
+        	<span class="page-1-top-leftmk-font-1">商品菜库存量</span>
+            <span class="page-1-top-leftmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt3}}" class="bigimg"/>
+        	<br>
+        	<span class="page-1-top-leftmk-font-3">{{spckc}}</span>
+        </td>
+        <td style="padding:0% 3% 0% 5%;">
+        	<div class="fengexian1"></div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('csl');">
+            <span class="page-1-top-rightmk-font-1">采收量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt0}}" class="midimg1"/>
+            <br>
+            <span class="page-1-top-rightmk-font-3">{{csl}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('ckl');">
+        	<span class="page-1-top-rightmk-font-1">出库量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt1}}" class="midimg1"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{ckl}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('jpckc');">
+        	<span class="page-1-top-rightmk-font-1">精品菜库存量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt2}}" class="midimg"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{jpckc}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('yjcc');">
+        	<span class="page-1-top-rightmk-font-1">预计出菜量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt4}}" class="midimg"/>
+            <span class="page-1-top-rightmk-font-1">　</span>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{yjccl}}</span>
+        </div>
+        </td>
+        </tr></table>
+    </div>
+    <div class="div-mk page-1-topmk" id="div_yjcc">
+    	<table class="page-1-topmk-table"><tr>
+    	<td>
+        	<span class="page-1-top-leftmk-font-1">预计出菜量</span>
+            <span class="page-1-top-leftmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt4}}" class="bigimg"/>
+        	<br>
+        	<span class="page-1-top-leftmk-font-3">{{yjccl}}</span>
+        </td>
+        <td style="padding:0% 3% 0% 5%;">
+        	<div class="fengexian1"></div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('csl');">
+            <span class="page-1-top-rightmk-font-1">采收量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt0}}" class="midimg1"/>
+            <br>
+            <span class="page-1-top-rightmk-font-3">{{csl}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('ckl');">
+        	<span class="page-1-top-rightmk-font-1">出库量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt1}}" class="midimg1"/>
+            <span class="page-1-top-rightmk-font-1">　</span>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{ckl}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('jpckc');">
+        	<span class="page-1-top-rightmk-font-1">精品菜库存量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt2}}" class="midimg"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{jpckc}}</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Kcllx('spckc');">
+        	<span class="page-1-top-rightmk-font-1">商品菜库存量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/{{pt3}}" class="midimg"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">{{spckc}}</span>
+        </div>
+        </td>
+        </tr></table>
+    </div>
+    
+    <br>
+    <div class="div-mk page-1-topmk">
+    	<table width="100%"><tr>
+            <td width="25%">
+                <span class="page-1-top-rightmk-font-1" id="span_name"></span>
+                <span class="page-1-top-rightmk-font-2">(Kg)</span>
+                <img src="/static/images/blue.png" class="midimg"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="page-1-top-rightmk-font-3" id="span_number"></span>
+        	</td>
+            <td style="width:40%;">
+            </td>
+            <td>
+                <div class="page-1-smalldiv" type="button" onClick="Fxlx('month');">月分析</div>
+            </td>
+            <td>
+            	<div class="page-1-smalldiv" type="button" onClick="Fxlx('week');">周分析</div>
+            </td>
+            <td>
+            	<div class="page-1-smalldiv" type="button" onClick="Fxlx('day');">日分析</div>
+            </td>
+        </tr></table>
+        <br>
+        <div class="page-buttom-mk" id="container1"></div>
+    </div>
+    
+    
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" style="width:90%;">
+    <div class="modal-content div-mk">
+      <div class="modal-body">
+        <div class="page-modal-mk" id="container2"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-primary" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="banquan">
+	<br>Copyright © 2015 Beijing Guanghua5 Network Technology Co., Ltd. All Rights Reserved. 北京光华路五号网络科技有限公司 版权所有
+</div>
+</body>
+</html>

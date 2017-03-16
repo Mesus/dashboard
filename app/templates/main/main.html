@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>主页</title>
+    <link href="/static/field/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/field/jquery.min.js"></script>
+    <script src="/static/field/bootstrap.min.js"></script>
+
+    <link href="/static/field/main.css" rel="stylesheet">
+    <script src="/static/field/datenl.js"></script>
+    <link href="/static/field/animsition.min.css" rel="stylesheet">
+    <script src="/static/field/jquery.animsition.min.js"></script>
+    <script>
+        var picid = "{{d_icon}}";
+        var i = 0;
+        window.setInterval(cache,10000);
+        window.onload = function () {
+            var sd = showDate();
+            var tmp = getFullYear(dNow)+"年"+(dNow.getMonth()+1)+"月"+dNow.getDate()+"日";
+            console.log(tmp);
+            document.getElementById("sjfxrq").innerHTML = "("+tmp+"数据分析)";
+            document.getElementById("daterq").innerHTML = sd;
+            document.getElementById("img_weather").src = "/static/images/weather/" + picid;
+        }
+        function cache() {
+            var cachearr = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
+            var desc = "{{desc|safe}}";
+            var temp = "{{temp}}";
+            var cnname = "{{cnname}}";
+            //console.log(desc);
+            var arr_desc = desc.split(",")
+            var arr_temp = temp.split(",")
+            var arr_cn = cnname.split(",");
+            //console.log(arr_cn);
+            document.getElementById("img_weather").src = "/static/images/weather/" + arr_desc[i];
+            $("#w_temp").html(arr_temp[i]);
+            $("#cn").html(arr_cn[i]);
+//            $('#weather').css("-webkit-animation","flipInX 10s");
+            i++;
+            if (i >= arr_desc.length)
+                i = 0;
+        }
+        $(document).ready(function () {
+            $('#wall').click(function () {
+                        <!--console.log("1111");-->
+//            $(this).css("-webkit-transform","translate(50px,0px)");-->
+//        $(this).css("background-color","red");-->
+                        <!--&lt;!&ndash;$(this).css("-webkit-animation","flipInX 2s");&ndash;&gt;-->
+                        var p_time = getQueryString("time");
+                        window.location.href = '/weather_index?time='+p_time;
+                    }
+            );
+
+            $('#div_product').click(function () {
+                        var p_time = getQueryString("time");
+                        console.log(p_time);
+                        window.location.href = '/product_index?time='+p_time;
+                    }
+            );
+            $('#div_loss').click(function () {
+                        var p_time = getQueryString("time");
+                        window.location.href='/loss_index?time='+p_time;
+                    }
+            );
+        });
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+    </script>
+    <style>
+          #weather {
+            
+             -webkit-animation-name:'flipInX';/*动画属性名，也就是我们前面keyframes定义的动画名*/
+             -webkit-animation-duration: 5s;/*动画持续时间*/
+/*             -webkit-animation-timing-function: ease-in-out; 动画频率，和transition-timing-function是一样的*/
+             -webkit-animation-delay: 10s;/*动画延迟时间*/
+             -webkit-animation-iteration-count: infinite;/*定义循环资料，infinite为无限次*/
+             -webkit-animation-direction: alternate;定义动画方式
+          }        
+        @media screen and (max-width: 1600px) {
+            body {
+                font-size: 12px;
+            }
+
+            .logo {
+                height: 11%;
+            }
+
+            .bigimg {
+                width: 3%;
+            }
+
+            .midimg {
+                width: 5%;
+            }
+
+            .smallimg {
+                width: 7%;
+            }
+
+            .smallimg1 {
+                width: 10%;
+            }
+        }
+
+        @media screen and (min-width: 1600px) and (max-width: 2100px) {
+            body {
+                font-size: 15px;
+            }
+
+            .logo {
+                height: 13%;
+            }
+
+            .bigimg {
+                width: 4%;
+            }
+
+            .midimg {
+                width: 6%;
+            }
+
+            .smallimg {
+                width: 8%;
+            }
+
+            .smallimg1 {
+                width: 11%;
+            }
+        }
+
+        @media screen and (min-width: 2100px) and (max-width: 2800px) {
+            body {
+                font-size: 18px;
+            }
+
+            .logo {
+                height: 15%;
+            }
+
+            .bigimg {
+                width: 5%;
+            }
+
+            .midimg {
+                width: 7%;
+            }
+
+            .smallimg {
+                width: 9%;
+            }
+
+            .smallimg1 {
+                width: 13%;
+            }
+        }
+
+        @media screen and (min-width: 2800px) {
+            body {
+                font-size: 100px;
+            }
+
+            .logo {
+                height: 100%;
+            }
+
+            .bigimg {
+                width: 30%;
+            }
+
+            .midimg {
+                width: 33%;
+            }
+
+            .smallimg {
+                width: 14%;
+            }
+
+            .smallimg1 {
+                width: 17%;
+            }
+        }
+
+        @-webkit-keyframes flipInX {
+            0% {
+                -webkit-transform: perspective(400px) rotateX(90deg);
+                opacity: 0;
+            }
+
+            40% {
+                -webkit-transform: perspective(400px) rotateX(-10deg);
+            }
+
+            70% {
+                -webkit-transform: perspective(400px) rotateX(10deg);
+            }
+
+            100% {
+                -webkit-transform: perspective(400px) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+    </style>
+
+</head>
+<body>
+<br>
+<!--<div></div><div id="r" ></div>
+    <div class="container">-->
+<div class="main">
+    <div class="div-title">
+        <table style="width:100%;">
+            <tr>
+                <td style="min-width:50%;text-align:left;"><img src="/static/images/logo.png" class="logo"/></td>
+                <td style="min-width:50%;text-align:right;"><span class="div-title-right" id="daterq">2016年5月5日&nbsp;&nbsp;农历&nbsp;&nbsp;三月十五&nbsp;&nbsp;立夏</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row" >
+        <div class="col-xs-5 div-mk mk1-2" id="div_product">
+            <div>
+                &nbsp;
+                <span class="mk1-2-font-1">采收量</span>&nbsp;&nbsp;
+                <span class="mk1-2-font-2">(总计)</span>&nbsp;&nbsp;
+                <img src="/static/images/{{pt0}}" class="bigimg"/>
+            </div>
+            <div>
+                &nbsp;
+                <span class="mk1-2-font-3">{{csl}}</span>&nbsp;&nbsp;
+                <span class="mk1-2-font-4">(Kg)</span>
+            </div>
+            <div class="fengexian"></div>
+            <table class="mk1-2-table-1">
+                <tr>
+                    <td style="width:16%"><span class="mk1-2-table-wz">出库量&nbsp;</span><span class="mk1-2-table-dw">(Kg)&nbsp;</span><img
+                            src="/static/images/{{pt1}}" class="smallimg1"/></td>
+                    <td style="width:16%"><span class="mk1-2-table-wz">采收量&nbsp;</span><span class="mk1-2-table-dw">(Kg)&nbsp;</span><img
+                            src="/static/images/{{pt0}}" class="smallimg1"/></td>
+                    <td><span class="mk1-2-table-wz">精品菜库存量&nbsp;</span><span
+                            class="mk1-2-table-dw">(Kg)&nbsp;</span><img src="/static/images/{{pt2}}" class="smallimg"/>
+                    </td>
+                    <td><span class="mk1-2-table-wz">商品菜库存量&nbsp;</span><span
+                            class="mk1-2-table-dw">(Kg)&nbsp;</span><img src="/static/images/{{pt3}}" class="smallimg"/>
+                    </td>
+                    <td><span class="mk1-2-table-wz">预计出菜量&nbsp;</span><span
+                            class="mk1-2-table-dw">(Kg)&nbsp;</span><img src="/static/images/{{pt4}}" class="smallimg"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="mk1-2-table-sz">{{ckl}}</span></td>
+                    <td><span class="mk1-2-table-sz">{{csl}}</span></td>
+                    <td><span class="mk1-2-table-sz">{{jpckc}}</span></td>
+                    <td><span class="mk1-2-table-sz">{{spckc}}</span></td>
+                    <td><span class="mk1-2-table-sz">{{yjccl}}</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-xs-5 col-md-offset-1 div-mk mk1-2">
+            <div>
+                &nbsp;
+                <span class="mk1-2-font-1">销售量</span>&nbsp;&nbsp;
+                <span class="mk1-2-font-2">(总计)</span>&nbsp;&nbsp;
+                <img src="/static/images/blue.png" class="bigimg"/>
+            </div>
+            <div>
+                &nbsp;
+                <span class="mk1-2-font-3">{{xsl}}</span>&nbsp;&nbsp;
+                <span class="mk1-2-font-4">(Kg)</span>
+            </div>
+            <div class="fengexian"></div>
+            <table class="mk1-2-table-1">
+                <tr>
+                    <td><span class="mk1-2-table-wz">销售量&nbsp;</span><span class="mk1-2-table-dw">(Kg)&nbsp;</span><img
+                            src="/static/images/{{st0}}" class="smallimg"/></td>
+                    <td><span class="mk1-2-table-wz">可供量&nbsp;</span><span class="mk1-2-table-dw">(Kg)&nbsp;</span><img
+                            src="/static/images/{{st1}}" class="smallimg"/></td>
+                    <td><span class="mk1-2-table-wz">调拨量&nbsp;</span><span class="mk1-2-table-dw">(Kg)&nbsp;</span><img
+                            src="/static/images/{{st2}}" class="smallimg"/></td>
+                    <td style="width:25%">
+                        <!--<span class="mk1-2-table-wz">·&nbsp;<a class="animsition-link"-->
+                                                                                 <!--href="/bundle"-->
+                                                                                 <!--data-animsition-out-class="rotate-out-lg">产品溯源</a>&nbsp;>></span>-->
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="mk1-2-table-sz">{{xsl}}</span></td>
+                    <td><span class="mk1-2-table-sz">{{kgl}}</span></td>
+                    <td><span class="mk1-2-table-sz">{{dbl}}</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="row">
+        <div class="col-xs-2 div-mk mk1-4" id="div_loss">
+            <div>
+                <span class="mk1-4-font-1">损耗</span>&nbsp;
+                <span class="mk1-4-font-2">（总计）</span>&nbsp;
+                <img src="/static/images/{{lt0}}" class="midimg"/>
+            </div>
+            <div>
+                <span class="mk1-4-font-3">{{yqshl}}</span>&nbsp;&nbsp;
+                <span class="mk1-4-font-4">(Kg)</span>
+            </div>
+            <div class="fengexian"></div>
+            <div class="mk1-4-gxsj" id="sjfxrq">(2016年5月5日数据分析)</div>
+            <br>
+            <table class="mk1-4-table-1">
+                <tr>
+                    <td><span class="mk1-2-table-wz">逾期损耗量&nbsp;</span><span
+                            class="mk1-2-table-dw">(Kg)&nbsp;</span><img src="/static/images/{{lt0}}" class="smallimg"/>
+                    </td>
+                    <td><span class="mk1-2-table-wz">调拨损耗量&nbsp;</span><span
+                            class="mk1-2-table-dw">(Kg)&nbsp;</span><img src="/static/images/{{lt1}}" class="smallimg"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="mk1-2-table-sz">{{yqshl}}</span></td>
+                    <td><span class="mk1-2-table-sz">{{dbshl}}</span></td>
+                </tr>
+                <tr>
+                    <td><br><span class="mk1-2-table-wz">加工损耗量量&nbsp;</span><span
+                            class="mk1-2-table-dw">(Kg)&nbsp;</span><img src="/static/images/{{lt2}}" class="smallimg"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="mk1-2-table-sz">{{jgshl}}</span></td>
+                </tr>
+                <tr>
+                    <td><span class="mk1-2-table-wz">&nbsp;</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-xs-2 col-md-offset-1 div-mk mk1-4">
+            <div>
+                <span class="mk1-4-font-1">物流</span>&nbsp;
+                <span class="mk1-4-font-2">（车次）</span>&nbsp;
+                <img src="/static/images/{{logint0}}" class="midimg"/>
+            </div>
+            <div>
+                <span class="mk1-4-font-3">{{cc}}</span>&nbsp;&nbsp;
+                <span class="mk1-4-font-4">(车次)</span>
+            </div>
+            <div class="fengexian"></div>
+            <div class="mk1-4-gxsj">&nbsp;</div>
+            <br>
+            <table class="mk1-4-table-1">
+                <tr>
+                    <td><span class="mk1-2-table-wz">出车量&nbsp;</span><span class="mk1-2-table-dw">(车次)&nbsp;</span><img
+                            src="/static/images/{{logint1}}" class="smallimg"/></td>
+                    <td><span class="mk1-2-table-wz">出勤量&nbsp;</span><span class="mk1-2-table-dw">(人数)&nbsp;</span><img
+                            src="/static/images/{{logint2}}" class="smallimg"/></td>
+                </tr>
+                <tr>
+                    <td><span class="mk1-2-table-sz">{{ccl}}</span></td>
+                    <td><span class="mk1-2-table-sz">{{cql}}</span></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><br><span class="mk1-2-table-wz"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><span class="mk1-2-table-wz"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="mk1-2-table-sz">&nbsp;</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-xs-2 col-md-offset-1 div-mk mk1-4">
+            <div>
+                <span class="mk1-4-font-1">管控</span>&nbsp;
+                <span class="mk1-4-font-2">（成都农场）</span>
+            </div>
+            <div><span class="mk1-4-font-3">{{wd}}</span><span class="mk1-4-font-3">℃</span></div>
+            <div class="fengexian"></div>
+            <div class="mk1-4-gxsj">&nbsp;</div>
+            <br>
+            <table class="mk1-4-table-1">
+                <tr>
+                    <td><span class="mk1-2-table-wz">模拟大棚&nbsp;</span><span class="mk1-2-table-dw">(℃)</span></td>
+                </tr>
+                <tr>
+                    <td><span class="mk1-2-table-sz">{{dp}}</span></td>
+                </tr>
+                <tr>
+                    <td><br><span class="mk1-2-table-wz">&nbsp;</span></td>
+                </tr>
+                <tr>
+                    <td><span class="mk1-2-table-wz">&nbsp;</span></td>
+                </tr>
+                <tr>
+                    <td><span class="mk1-2-table-sz">&nbsp;</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-xs-2 col-md-offset-1 div-mk mk1-4" id="wall">
+            <div id="weather">
+                <table style="width:100%;">
+                <tr>
+
+                    <td style="width:65%;">
+
+                        <div>
+                            <span class="mk1-4-font-1">气象</span>&nbsp;
+                            <span class="mk1-4-font-2" id="cn">{{d_desc}}</span>
+
+                        </div>
+                        <div><span class="mk1-4-font-3" id="w_temp">{{d_temp}}</span><span class="mk1-4-font-3">℃</span></div>
+
+                    </td>
+                    <td><img id="img_weather" style="width:100%"/></td>
+
+                </tr>
+            </table>
+            </div>
+            <div class="fengexian"></div>
+            <div class="mk1-4-gxsj">　</div>
+            <br>
+            <table class="mk1-4-table-1">
+                <tr>
+                    <td><span class="mk1-2-table-wz">·&nbsp;详细气象预报&nbsp;>></span></td>
+                </tr>
+                <tr>
+                    <td><br><span class="mk1-2-table-wz">&nbsp;</span></td>
+                </tr>
+                <tr>
+                    <td><span class="mk1-2-table-sz">&nbsp;</span></td>
+                </tr>
+                <tr>
+                    <td><span class="mk1-2-table-wz">&nbsp;</span></td>
+                </tr>
+                <tr>
+                    <td><span class="mk1-2-table-sz">&nbsp;</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="banquan">
+    <br>Copyright © 2016 Beijing Guanghua5 Network Technology Co., Ltd. All Rights Reserved. 北京光华路五号网络科技有限公司 版权所有
+</div>
+</body>
+</html>

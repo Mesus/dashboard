@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>表格展示</title>
+    <link href="/static/field/bootstrap.min.css" rel="stylesheet">
+	<script src="/static/field/jquery.min.js"></script>
+	<script src="/static/field/bootstrap.min.js"></script>
+
+    
+    <link href="/static/field/page.css" rel="stylesheet">
+    <link href="/static/field/main.css" rel="stylesheet">
+    <script src="/static/field/datenl.js"></script>
+    <script src="/static/field/page.js"></script>
+    
+    
+    <link href="/static/field/bootstrap-datetimepicker.css" rel="stylesheet">
+	<script src="/static/field/moment-with-locales.js"></script>
+	<script src="/static/field/bootstrap-datetimepicker.js"></script>
+    
+<script>
+	window.onload=function()
+	{
+		document.getElementById("daterq").innerHTML=showDate();
+	}
+</script>
+</head>
+<body>
+<br>
+<div class="div-title">
+	<table style="width:100%;"><tr>
+    	<td style="min-width:50%;text-align:left;"><img src="/static/images/logo.png" class="logo"/></td>
+        <td style="min-width:50%;text-align:right;"><span class="div-title-right" id="daterq"></span></td></tr>
+	</table>
+</div>
+<div class="table-font-title">预计出菜量</div>
+<div class="table-fengexian"></div>
+<div style="text-align:center;">
+	<div class="btn-group">
+    	<button class="btn btn-default dropdown-toggle table-farm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">全部农场<span>&nbsp;&nbsp;</span><span class="caret"></span></button>
+        <ul class="dropdown-menu table-select-ul" aria-labelledby="dropdownMenu1">
+        	<li class="table-select-li"><span class="table-select-wz">北京</span></li>
+        	<li class="table-select-li"><span class="table-select-wz">上海</span></li>
+            <li class="table-select-li"><span class="table-select-wz">广州</span></li>
+        </ul>
+   	</div>
+    <div class="btn-group">
+    	<button class="btn btn-default dropdown-toggle table-farm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">全部品类<span>&nbsp;&nbsp;</span><span class="caret"></span></button>
+        <ul class="dropdown-menu table-select-ul" aria-labelledby="dropdownMenu2">
+        	<li class="table-select-li"><span class="table-select-wz">果菜类</span></li>
+            <li class="table-select-li"><span class="table-select-wz">叶菜类</span></li></li>
+        </ul>
+   	</div>
+    <span class="table-font-sbsj">上报时间:</span>
+    <div class="btn-group">
+        <div class='col-sm-6' style="width:100%;">
+            <input type='text' class="form-control table-font-date" id='datetimepicker4' value="2016-05-18"/>
+        </div>
+    </div>
+    <div class="btn table-farm">查询</div>
+</div>
+<br><br>
+<div class="div-mk table-1-mk" style="border:white 2px solid">
+	<div>
+    	<table class="table table-font-table1">
+        	<thead><th></th>
+            	<th><span class="table-font-th1-1">毛菜采摘量</span><span class="table-font-th1-2">(Kg)</span></th>
+                <th><span class="table-font-th1-1">精品菜库存量</span><span class="table-font-th1-2">(Kg)</span></th>
+                <th><span class="table-font-th1-1">精品菜出库量</span><span class="table-font-th1-2">(Kg)</span></th>
+                <th><span class="table-font-th1-1">商品菜库存量</span><span class="table-font-th1-2">(Kg)</span></th>
+                <th><span class="table-font-th1-1">商品菜出库量</span><span class="table-font-th1-2">(Kg)</span></th>
+                <th><span class="table-font-th1-1">明日预计出菜量</span><span class="table-font-th1-2">(Kg)</span></th>
+            </thead>
+            <tbody>
+            <tr>
+            	<td>合计</td>
+            	<td><span class="table-font-th1-3">1563.0</span><img src="/static/images/blue.png" class="midimg"/></td>
+                <td><span class="table-font-th1-3">2935.95</span><img src="/static/images/orage.png" class="midimg"/></td>
+                <td><span class="table-font-th1-3">57.3</span><img src="/static/images/blue.png" class="midimg"/></td>
+                <td><span class="table-font-th1-3">0.0</span><img src="/static/images/gray.png" class="midimg"/></td>
+                <td><span class="table-font-th1-3">1173.95</span><img src="/static/images/yellow.png" class="midimg"/></td>
+                <td><span class="table-font-th1-3">1650.0</span><img src="/static/images/orage.png" class="midimg"/></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="table-table-fengexian"></div>
+        <table class="table table-font-table2">
+        	<thead>
+            	<th><span class="table-font-th2-1">品名代码</span></th>
+                <th><span class="table-font-th2-1">品名</span></th>
+                <th><span class="table-font-th2-1">品类</span></th>
+                <th><span class="table-font-th2-1">毛菜采摘量</span><span class="table-font-th2-2">(Kg)</span></th>
+                <th><span class="table-font-th2-1">精品菜库存量</span><span class="table-font-th2-2">(Kg)</span></th>
+                <th><span class="table-font-th2-1">精品菜出库量</span><span class="table-font-th2-2">(Kg)</span></th>
+                <th><span class="table-font-th2-1">商品菜库存量</span><span class="table-font-th2-2">(Kg)</span></th>
+                <th><span class="table-font-th2-1">商品菜出库量</span><span class="table-font-th2-2">(Kg)</span></th>
+                <th><span class="table-font-th2-1">明日预计出菜量</span><span class="table-font-th2-2">(Kg)</span></th>
+            </thead>
+            <tbody>
+            <tr>
+            	<td>1001</td>
+            	<td>有机黄瓜</td>
+                <td>果菜</td>
+                <td>64.000</td>
+                <td>350.000</td>
+                <td>1.500</td>
+                <td>0.000</td>
+                <td>54.600</td>
+                <td>100.000</td>
+            </tr>
+            <tr><td>1001</td><td>有机黄瓜</td><td>果菜</td><td>64.000</td><td>350.000</td><td>1.500</td><td>0.000</td><td>54.600</td><td>100.000</td></tr>
+            <tr><td>1001</td><td>有机黄瓜</td><td>果菜</td><td>64.000</td><td>350.000</td><td>1.500</td><td>0.000</td><td>54.600</td><td>100.000</td></tr>
+            <tr><td>1001</td><td>有机黄瓜</td><td>果菜</td><td>64.000</td><td>350.000</td><td>1.500</td><td>0.000</td><td>54.600</td><td>100.000</td></tr>
+            <tr><td>1001</td><td>有机黄瓜</td><td>果菜</td><td>64.000</td><td>350.000</td><td>1.500</td><td>0.000</td><td>54.600</td><td>100.000</td></tr>
+            <tr><td>1001</td><td>有机黄瓜</td><td>果菜</td><td>64.000</td><td>350.000</td><td>1.500</td><td>0.000</td><td>54.600</td><td>100.000</td></tr>
+            <tr><td>1001</td><td>有机黄瓜</td><td>果菜</td><td>64.000</td><td>350.000</td><td>1.500</td><td>0.000</td><td>54.600</td><td>100.000</td></tr>
+            <tr><td>1001</td><td>有机黄瓜</td><td>果菜</td><td>64.000</td><td>350.000</td><td>1.500</td><td>0.000</td><td>54.600</td><td>100.000</td></tr>
+            <tr><td>1001</td><td>有机黄瓜</td><td>果菜</td><td>64.000</td><td>350.000</td><td>1.500</td><td>0.000</td><td>54.600</td><td>100.000</td></tr>
+            <tr><td>1001</td><td>有机黄瓜</td><td>果菜</td><td>64.000</td><td>350.000</td><td>1.500</td><td>0.000</td><td>54.600</td><td>100.000</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="banquan">
+	<br>Copyright © 2015 Beijing Guanghua5 Network Technology Co., Ltd. All Rights Reserved. 北京光华路五号网络科技有限公司 版权所有
+</div>
+
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker4').datetimepicker({format:'YYYY-MM-DD'});
+            });
+        </script> 
+</body>
+</html>

@@ -1,0 +1,73 @@
+<html>
+<head>
+    <title>溯源网络</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            /*border: 1px solid lightgray;*/
+        }
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css" rel="stylesheet" type="text/css"/>
+    <!--<script src="les.js" charset="utf-8"></script>-->
+
+    <script type="text/javascript">
+        function draw() {
+            {{js|safe}}
+            console.log(nodes);
+            w = document.body.clientWidth;
+            h = document.body.clientHeight;
+            mn = document.getElementById("mynetwork");
+            mn.style.width=w+"px";
+            mn.style.height=h+"px";
+            console.log(w);
+            var data = {nodes:nodes, edges:edges};
+
+            // create a network
+            var container = document.getElementById('mynetwork');
+//            var data = {
+//                nodes: nodes,
+//                edges: edges
+//            };
+            var options = {
+                nodes: {
+                    shape: 'dot',
+                      scaling: {
+                        customScalingFunction: function (min,max,total,value) {
+                          return value/total;
+                        },
+                        min:5,
+                        max:150
+                      }
+                },
+                physics: {
+                    forceAtlas2Based: {
+                        gravitationalConstant: -20,
+                        centralGravity: 0.002,
+                        springLength: 130,
+                        springConstant: 0.18
+                    },
+                    maxVelocity: 46,
+                    solver: 'forceAtlas2Based',
+                    timestep: 0.05,
+                    stabilization: {iterations: 150}
+                }
+            };
+            var network = new vis.Network(container, data, options);
+
+        }
+    </script>
+</head>
+
+<body onload="draw()">
+
+
+<div id="mynetwork"></div>
+</body>
+</html>

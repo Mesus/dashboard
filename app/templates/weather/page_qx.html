@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>气象</title>
+    <link href="/static/field/list/sandbox.css" rel="stylesheet">
+    <link href="/static/field/list/drawer.min.css" rel="stylesheet">
+    <link href="/static/field/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/field/jquery.min.js"></script>
+    <script src="/static/field/bootstrap.min.js"></script>
+    <link href="/static/field/page.css" rel="stylesheet">
+    <link href="/static/field/main.css" rel="stylesheet">
+    <script src="/static/field/datenl.js"></script>
+    <script src="/static/field/page.js"></script>
+    <link href="/static/field/bootstrap-treeview.css" rel="stylesheet">
+    <script src="/static/field/bootstrap-treeview.js"></script>
+    <script type="text/javascript" src="/static/field/highcharts.js"></script>
+    <script src="/static/field/list/iscroll.min.js"></script>
+    <script src="/static/field/list/drawer.min.js" charset="utf-8"></script>
+    <script>
+    $(document).ready(function() {
+        $('.drawer').drawer();
+    });
+    </script>
+    <script type="text/javascript">
+    document.onmousemove = function(e) {
+        if (e.screenX == 0)
+            $('#showlist').click();
+    }
+
+    function aaa(event) {
+        var div = document.getElementById("test");
+        var x = event.clientX;
+        var divx = div.offsetWidth;
+        if (x > divx)
+            $('#showlist').click();
+    }
+
+    window.onload = function() {
+        document.getElementById("daterq").innerHTML = showDate();
+
+        var data = [{{c_0_wd}}, {{c_1_wd}}, {{c_2_wd}}, {{c_4_wd}}, {{c_5_wd}}, {{c_6_wd}}, {{c_7_wd}}];
+        var data1 = [18, 11, 22, 10, 17, 28, 15];
+        var xdata = ['{{c_0_day}}', '{{c_1_day}}', '{{c_2_day}}', '{{c_3_day}}', '{{c_4_day}}', '{{c_5_day}}', '{{c_6_day}}']
+        LoadQxt(xdata, data, data1);
+    }
+    $(document).ready(function() {
+        var options = {
+            levels: 5,
+            color: 'white',
+            backColor: '#1f2229',
+            showBorder: false,
+            onhoverColor: '#666666',
+            data: buildDomTree(),
+            onNodeSelected: function(event, node) {
+                alert("选择了:" + node.text);
+            },
+            onNodeExpanded: function(event, node) {
+                //alert("展开了:"+node.text);
+            }
+        };
+        $('#treeview').treeview(options);
+    });
+
+    function buildDomTree() {
+        var defaultData = [{
+            text: '主页',
+            nodes: [{
+                text: '采收量'
+            }, {
+                text: '销售量'
+            }, {
+                text: '损耗'
+            }, {
+                text: '物流'
+            }, {
+                text: '管控'
+            }, {
+                text: '气象'
+            }]
+        }];
+        return defaultData;
+    }
+
+    function LoadQxt(xdata, data_am, data_pm) {
+        $('#container1').highcharts({
+            chart: {
+                type: 'line',
+                backgroundColor: 'rgba(0,0,0,0)'
+            },
+            title: {
+                text: ''
+            },
+            exporting: {
+                enabled: false
+            },
+            legend: {
+                align: 'center',
+                verticalAlign: 'top',
+                itemStyle: {
+                    fontSize: '1.5em',
+                    color: 'white'
+                }
+            },
+            plotOptions: {
+                series: {
+                    lineWidth: '5px',
+                    marker: {
+                        radius: 8
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            xAxis: {
+                categories: xdata,
+                labels: {
+                    style: {
+                        fontSize: '1.5em',
+                        color: 'white'
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: ''
+                },
+                labels: {
+                    style: {
+                        fontSize: '1.5em',
+                        color: 'white'
+                    }
+                },
+                gridLineColor: '#808184',
+                gridLineWidth: '1px'
+            },
+            tooltip: {
+                valueSuffix: '℃'
+            },
+            series: [{
+                name: '气温',
+                data: data_am,
+                color: '#e24a4d'
+            }]
+        });
+    }
+
+    function Change(str) {
+        if (str == "1") {
+            document.getElementById("tu").style.display = "block";
+            document.getElementById("biao").style.display = "none";
+        } else {
+            document.getElementById("tu").style.display = "none";
+            document.getElementById("biao").style.display = "block";
+        }
+    }
+    </script>
+    <style>
+    .hour3 {
+        margin-top: 20px;
+        background: #282c35;
+        color: white;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .hour3 .row {
+        overflow: hidden;
+    }
+    
+    .hour3 .row img {
+        height: 32px;
+    }
+    
+    .hour3 .row div {
+        width: 125px;
+        height: 41px;
+        line-height: 41px;
+        float: left;
+        text-align: center;
+        font-size: 14px;
+    }
+    
+    .hour3 .first div {
+        height: 52px;
+        line-height: 52px;
+        font-size: 18px;
+    }
+    
+    .hour3 .row div.label {
+        width: 136px;
+        padding-left: 80px;
+        text-align: left;
+    }
+    
+    .hour3 .second div img {
+        margin-top: 3px;
+    }
+    
+    .hour3 .row .h3_tqxx {
+        background: url("http://www.nmc.cn/static/site/nmc/themes/basic/images/forecast/tqxx.png") 40px center no-repeat;
+    }
+    
+    .hour3 .row .h3_wd {
+        background: url("http://www.nmc.cn/static/site/nmc/themes/basic/images/forecast/wd.png") 40px center no-repeat;
+    }
+    
+    .hour3 .row .h3_js {
+        background: url("http://www.nmc.cn/static/site/nmc/themes/basic/images/forecast/js.png") 40px center no-repeat;
+    }
+    
+    .hour3 .row .h3_fl {
+        background: url("http://www.nmc.cn/static/site/nmc/themes/basic/images/forecast/fl.png") 40px center no-repeat;
+    }
+    
+    .hour3 .row .h3_fx {
+        background: url("http://www.nmc.cn/static/site/nmc/themes/basic/images/forecast/fx.png") 40px center no-repeat;
+    }
+    
+    .hour3 .row .h3_qy {
+        background: url("http://www.nmc.cn/static/site/nmc/themes/basic/images/forecast/qy.png") 40px center no-repeat;
+    }
+    
+    .hour3 .row .h3_xdsd {
+        background: url("http://www.nmc.cn/static/site/nmc/themes/basic/images/forecast/xdsd.png") 40px center no-repeat;
+    }
+    
+    .hour3 .row .h3_yl {
+        background: url("http://www.nmc.cn/static/site/nmc/themes/basic/images/forecast/yl.png") 40px center no-repeat;
+    }
+    
+    .hour3 .row .h3_njd {
+        background: url("http://www.nmc.cn/static/site/nmc/themes/basic/images/forecast/njd.png") 40px center no-repeat;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="drawer drawer--left">
+        <header role="banner">
+            <button type="button" class="drawer-toggle" style="background:transparent;color:white; display:none;" id="showlist"></button>
+            <!--<button type="button" class="drawer-toggle drawer-hamburger" style="background:white;">>></button>-->
+            <div class="drawer-nav" role="navigation" id="test" style="opacity:0.98; background:#1f2229; padding:0px 0px;" onMouseOut="aaa(event);">
+                <div id="treeview" style="color:white;"></div>
+            </div>
+        </header>
+    </div>
+    <br>
+    <div>
+        <div class="div-title">
+            <table style="width:100%;">
+                <tr>
+                    <td style="min-width:50%;text-align:left;"><img src="/static/images/logo.png" class="logo" /></td>
+                    <td style="min-width:50%;text-align:right;"><span class="div-title-right" id="daterq"></span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="div-mk page-1-topmk">
+            <table class="page-qx-topmk-table">
+                <tr>
+                    <td style="width:24%;padding:0% 0%;">
+                        <span class="page-qx-top-leftmk-font-1">{{c_0_name}}</span>
+                        <br>
+                        <table width="100%">
+                            <tr>
+                                <td style="padding:10% 0% 5% 0%;" width="50%"><span class="page-qx-top-leftmk-font-2">{{c_0_day}}</span></td>
+                                <td width="5%"></td>
+                                <td style="padding:10% 0% 5% 0%;" rowspan="3"><img id="img_weather" src="/static/images/weather/{{c_0_icon}}" style="width:90%" /></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:1% 0% 5% 0%;"><span class="page-qx-top-leftmk-font-3">{{c_0_qx}}&nbsp;&nbsp;&nbsp;&nbsp;{{c_0_wd}}℃</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:1% 0% 5% 0%;"><span class="page-qx-top-leftmk-font-4">{{c_0_fx}}&nbsp;&nbsp;&nbsp;&nbsp;{{c_0_fl}}</span></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <div class="fengexian1"></div>
+                    </td>
+                    <td style="width:10%;">
+                        <table class="page-qx-top-rightmk-table">
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-2">{{c_1_day}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-5">{{c_1_week}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><img id="img_weather" src="/static/images/weather/{{c_1_icon}}" class="top-smimg" /></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_1_qx}}&nbsp;&nbsp;&nbsp;{{c_1_wd}}℃</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_1_fx}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_1_fl}}</span></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <div class="fengexian1"></div>
+                    </td>
+                    <td style="width:10%;">
+                        <table class="page-qx-top-rightmk-table">
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-2">{{c_2_day}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-5">{{c_2_week}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><img id="img_weather" src="/static/images/weather/{{c_2_icon}}" class="top-smimg" /></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_2_qx}}&nbsp;&nbsp;&nbsp;&nbsp;{{c_2_wd}}℃</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_2_fx}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_2_fl}}</span></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <div class="fengexian1"></div>
+                    </td>
+                    <td style="width:10%;">
+                        <table class="page-qx-top-rightmk-table">
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-2">{{c_3_day}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-5">{{c_3_week}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><img id="img_weather" src="/static/images/weather/{{c_3_icon}}" class="top-smimg" /></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_3_qx}}&nbsp;&nbsp;&nbsp;&nbsp;{{c_3_wd}}℃</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_3_fx}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_3_fl}}</span></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <div class="fengexian1"></div>
+                    </td>
+                    <td style="width:10%;">
+                        <table class="page-qx-top-rightmk-table">
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-2">{{c_4_day}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-5">{{c_4_week}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><img id="img_weather" src="/static/images/weather/{{c_4_icon}}" class="top-smimg" /></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_4_qx}}&nbsp;&nbsp;&nbsp;&nbsp;{{c_4_wd}}℃</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_4_fx}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_4_fl}}</span></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <div class="fengexian1"></div>
+                    </td>
+                    <td style="width:10%;">
+                        <table class="page-qx-top-rightmk-table">
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-2">{{c_5_day}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-5">{{c_5_week}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><img id="img_weather" src="/static/images/weather/{{c_5_icon}}" class="top-smimg" /></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_5_qx}}&nbsp;&nbsp;&nbsp;&nbsp;{{c_5_wd}}℃</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_5_fx}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_5_fl}}</span></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <div class="fengexian1"></div>
+                    </td>
+                    <td style="width:10%;">
+                        <table class="page-qx-top-rightmk-table">
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-2">{{c_6_day}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-5">{{c_6_week}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><img id="img_weather" src="/static/images/weather/{{c_6_icon}}" class="top-smimg" /></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_6_qx}}&nbsp;&nbsp;&nbsp;&nbsp;{{c_6_wd}}℃</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_6_fx}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="page-qx-top-leftmk-font-6">{{c_6_fl}}</span></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <div class="fengexian1"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div class="div-mk page-buttom-mk" id="tu" style="display:none;">
+            <div style="text-align:right;">
+                <button class="btn btn-primary" style="font-size:1em;" type="button" onClick="Change('2');">转换详细信息</button>
+            </div>
+            <div id="container1" style="min-width:88%;"></div>
+        </div>
+        <div class="div-mk page-buttom-mk" id="biao">
+            <div style="text-align:right;">
+                <button class="btn btn-primary" style="font-size:1em;" type="button" onClick="Change('1');">转换历史数据</button>
+            </div>
+            <div id="day0" class="hour3">
+                <div class="row first">
+                    <div class="label">
+                        精细预报
+                    </div>
+                    <div style="font-size: 12px;">
+                        {{d_0_0}}
+                    </div>
+                    <div style="font-size: 12px;">
+                        {{d_0_1}}
+                    </div>
+                    <div style="font-size: 12px;">
+                        {{d_0_2}}
+                    </div>
+                    <div style="font-size: 12px;">
+                        {{d_0_3}}
+                    </div>
+                    <div style="font-size: 12px;">
+                        {{d_0_4}}
+                    </div>
+                    <div style="font-size: 12px;">
+                        {{d_0_5}}
+                    </div>
+                    <div style="font-size: 12px;">
+                        {{d_0_6}}
+                    </div>
+                    <div style="font-size: 12px;">
+                        {{d_0_7}}
+                    </div>
+                </div>
+                <div class="row second tqxx">
+                    <div class="label h3_tqxx">
+                        天气现象
+                    </div>
+                    <div>
+                        {{d_1_0|safe}}
+                    </div>
+                    <div>
+                        {{d_1_1|safe}}
+                    </div>
+                    <div>
+                        {{d_1_2|safe}}
+                    </div>
+                    <div>
+                        {{d_1_3|safe}}
+                    </div>
+                    <div>
+                        {{d_1_4|safe}}
+                    </div>
+                    <div>
+                        {{d_1_5|safe}}
+                    </div>
+                    <div>
+                        {{d_1_6|safe}}
+                    </div>
+                    <div>
+                        {{d_1_7|safe}}
+                    </div>
+                </div>
+                <div class="row wd">
+                    <div class="label h3_wd">
+                        气温
+                    </div>
+                    <div>
+                        {{d_2_0}}
+                    </div>
+                    <div>
+                        {{d_2_1}}
+                    </div>
+                    <div>
+                        {{d_2_2}}
+                    </div>
+                    <div>
+                        {{d_2_3}}
+                    </div>
+                    <div>
+                        {{d_2_4}}
+                    </div>
+                    <div>
+                        {{d_2_5}}
+                    </div>
+                    <div>
+                        {{d_2_6}}
+                    </div>
+                    <div>
+                        {{d_2_7}}
+                    </div>
+                </div>
+                <div class="row js">
+                    <div class="label h3_js">
+                        降水
+                    </div>
+                    <div>
+                        {{d_3_0}}
+                    </div>
+                    <div>
+                        {{d_3_1}}
+                    </div>
+                    <div>
+                        {{d_3_2}}
+                    </div>
+                    <div>
+                        {{d_3_3}}
+                    </div>
+                    <div>
+                        {{d_3_4}}
+                    </div>
+                    <div>
+                        {{d_3_5}}
+                    </div>
+                    <div>
+                        {{d_3_6}}
+                    </div>
+                    <div>
+                        {{d_3_7}}
+                    </div>
+                </div>
+                <div class="row winds">
+                    <div class="label h3_fl">
+                        风速
+                    </div>
+                    <div>
+                        {{d_4_0}}
+                    </div>
+                    <div>
+                        {{d_4_1}}
+                    </div>
+                    <div>
+                        {{d_4_2}}
+                    </div>
+                    <div>
+                        {{d_4_3}}
+                    </div>
+                    <div>
+                        {{d_4_4}}
+                    </div>
+                    <div>
+                        {{d_4_5}}
+                    </div>
+                    <div>
+                        {{d_4_6}}
+                    </div>
+                    <div>
+                        {{d_4_7}}
+                    </div>
+                </div>
+                <div class="row windd">
+                    <div class="label h3_fx">
+                        风向
+                    </div>
+                    <div>
+                        {{d_5_0}}
+                    </div>
+                    <div>
+                        {{d_5_1}}
+                    </div>
+                    <div>
+                        {{d_5_2}}
+                    </div>
+                    <div>
+                        {{d_5_3}}
+                    </div>
+                    <div>
+                        {{d_5_4}}
+                    </div>
+                    <div>
+                        {{d_5_5}}
+                    </div>
+                    <div>
+                        {{d_5_6}}
+                    </div>
+                    <div>
+                        {{d_5_7}}
+                    </div>
+                </div>
+                <div class="row qy">
+                    <div class="label h3_qy">
+                        气压
+                    </div>
+                    <div>
+                        {{d_6_0}}
+                    </div>
+                    <div>
+                        {{d_6_1}}
+                    </div>
+                    <div>
+                        {{d_6_2}}
+                    </div>
+                    <div>
+                        {{d_6_3}}
+                    </div>
+                    <div>
+                        {{d_6_4}}
+                    </div>
+                    <div>
+                        {{d_6_5}}
+                    </div>
+                    <div>
+                        {{d_6_6}}
+                    </div>
+                    <div>
+                        {{d_6_7}}
+                    </div>
+                </div>
+                <div class="row xdsd">
+                    <div class="label h3_xdsd">
+                        相对湿度
+                    </div>
+                    <div>
+                        {{d_7_0}}
+                    </div>
+                    <div>
+                        {{d_7_1}}
+                    </div>
+                    <div>
+                        {{d_7_2}}
+                    </div>
+                    <div>
+                        {{d_7_3}}
+                    </div>
+                    <div>
+                        {{d_7_4}}
+                    </div>
+                    <div>
+                        {{d_7_5}}
+                    </div>
+                    <div>
+                        {{d_7_6}}
+                    </div>
+                    <div>
+                        {{d_7_7}}
+                    </div>
+                </div>
+                <div class="row yl">
+                    <div class="label h3_yl">
+                        云量
+                    </div>
+                    <div>
+                        {{d_8_0}}
+                    </div>
+                    <div>
+                        {{d_8_1}}
+                    </div>
+                    <div>
+                        {{d_8_2}}
+                    </div>
+                    <div>
+                        {{d_8_3}}
+                    </div>
+                    <div>
+                        {{d_8_4}}
+                    </div>
+                    <div>
+                        {{d_8_5}}
+                    </div>
+                    <div>
+                        {{d_8_6}}
+                    </div>
+                    <div>
+                        {{d_8_7}}
+                    </div>
+                </div>
+                <div class="row njd">
+                    <div class="label h3_njd">
+                        能见度
+                    </div>
+                    <div>
+                        {{d_9_0|safe}}
+                    </div>
+                    <div>
+                        {{d_9_1|safe}}
+                    </div>
+                    <div>
+                        {{d_9_2|safe}}
+                    </div>
+                    <div>
+                        {{d_9_3|safe}}
+                    </div>
+                    <div>
+                        {{d_9_4|safe}}
+                    </div>
+                    <div>
+                        {{d_9_5|safe}}
+                    </div>
+                    <div>
+                        {{d_9_6|safe}}
+                    </div>
+                    <div>
+                        {{d_9_7|safe}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banquan">
+        <br>Copyright © 2016 Beijing Guanghua5 Network Technology Co., Ltd. All Rights Reserved. 北京光华路五号网络科技有限公司 版权所有
+    </div>
+</body>
+
+</html>

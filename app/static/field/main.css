@@ -1,0 +1,393 @@
+*{
+	margin:0;
+	padding:0% 1%;
+	border:0;
+}
+body{
+	background:#1f2229;
+	width:100%;
+	height:100%;
+	/*font-family:"Microsoft YaHei" ! important;*/
+	font-family:'微软雅黑';
+}
+@font-face{
+	font-family:'微软雅黑';
+	src:url('../font/msyh.ttf') format('truetype'),
+}
+/*上方样式*/
+.div-title{
+	padding:0% 0.8% 0.8% 0%;
+}
+.div-title-right{
+	font-size:1em;
+	color:#EEEEEE;
+	text-align:right;
+}
+/*模块样式*/
+.div-mk{
+	background-color:#282c35;
+	box-shadow:5px 5px 5px #1c2027;
+	border-radius:10px;
+	color:white;
+}
+/*分隔线*/
+.fengexian{
+	border-top:#abacae 1px dashed;
+	overflow:hidden;
+	hight:1px;
+	margin:2% 0% 3% 0%;
+}
+
+
+/*1/2模块内部表框*/
+.mk1-2{
+	padding:1.5% 1.5%;
+}
+/*1/4模块内部表框*/
+.mk1-4{
+	padding:2% 1.3%;
+}
+
+
+/*1/2字体样式*/
+/*名字*/
+.mk1-2-font-1{
+	font-size:2.9em;
+}
+/*(总计)*/
+.mk1-2-font-2{
+	font-size:1.5em;
+}
+/*数量*/
+.mk1-2-font-3{
+	font-size:5.5em;
+}
+/*(Kg)*/
+.mk1-2-font-4{
+	font-size:2.8em;
+}
+/*1/2下方表格样式*/
+.mk1-2-table-1{
+	color:#abacae;
+	width:100%;
+}
+.mk1-2-table-1 td{
+	max-width:20%;
+}
+/*1/2下方表格文字样式*/
+.mk1-2-table-wz{
+	font-size:1.15em;
+}
+/*1/2下方表格单位样式*/
+.mk1-2-table-dw{
+	font-size:0.6em;
+}
+/*1/2下方表格数字样式*/
+.mk1-2-table-sz{
+	font-size:1.7em;
+}
+
+
+/*1/4字体样式*/
+/*名字*/
+.mk1-4-font-1{
+	font-size:2.1em;
+}
+/*(总计)*/
+.mk1-4-font-2{
+	font-size:1.1em;
+}
+/*数量*/
+.mk1-4-font-3{
+	font-size:4em;
+}
+/*(Kg)*/
+.mk1-4-font-4{
+	font-size:2em;
+}
+/*1/4模块更新时间字体样式*/
+.mk1-4-gxsj{
+	color:#abacae;
+	text-align:center;
+	font-size:1em;
+}
+/*1/4下方表格样式*/
+.mk1-4-table-1{
+	color:#abacae;
+	width:100%;
+}
+.mk1-4-table-1 td{
+	width:50%;
+	padding:0px 0px 8px 0px;
+}
+/*页底版权*/
+.banquan{
+	text-align:center;
+	color:#abacae;
+}
+
+
+/*page-1样式*/
+.page-1-topmk{
+	margin:0% 0%;
+	padding:1.5% 1.5%;
+}
+.page-1-topmk-table{
+	height:100%;
+	width:100%;
+}
+.page-1-topmk-table td{
+	height:100%;
+	min-width:25%;
+	vertical-align:bottom;
+}
+/*竖分隔线*/
+.fengexian1{
+	border-left:#abacae 2px dashed;
+	overflow:hidden;
+	width:1px;
+	height:100%;
+}
+/*page1上方模块左侧样式*/
+/*名字*/
+.page-1-top-leftmk-font-1{
+	font-size:2.9em;
+}
+/*(Kg)*/
+.page-1-top-leftmk-font-2{
+	font-size:1.5em;
+}
+/*数量*/
+.page-1-top-leftmk-font-3{
+	font-size:5.5em;
+}
+/*(Kg)*/
+.page-1-top-leftmk-font-4{
+	font-size:2.8em;
+}
+/*page1上方模块右侧样式*/
+/*名字*/
+.page-1-top-rightmk-font-1{
+	font-size:1.9em;
+}
+/*(Kg)*/
+.page-1-top-rightmk-font-2{
+	font-size:0.9em;
+}
+/*数量*/
+.page-1-top-rightmk-font-3{
+	font-size:3em;
+}
+/*page-1小标签样式*/
+.page-1-smalldiv{
+	background-color:#3acdd4;
+	width:90%;
+	padding:3% 15% 5% 15%;
+	border-radius:20px;
+	color:white;
+	text-align:center;
+	font-size:1.2em;
+	cursor:pointer;
+}
+.page-1-smalldiv:hover{color:black;}
+/*.page-1-smalldiv-ul{
+	opacity:0.9;
+	background:#1c2027;
+	border-radius:10px;
+}
+.page-1-smalldiv-li{
+	text-align:right;
+	opacity:0.9;
+	background:#282c35;
+	margin:3% 6%;
+}
+.page-1-smalldiv-wz{
+	opacity:1;
+	font-size:1.2em;
+}
+#dropdown1 li:hover{background-color:#888;}
+#dropdown2 li:hover{background-color:#888;}
+#dropdown3 li:hover{background-color:#888;}*/
+
+
+.page-qx-topmk-table{
+	height:100%;
+	width:100%;
+}
+.page-qx-topmk-table td{
+	height:100%;
+}
+/*page1上方模块左侧样式*/
+.page-qx-top-leftmk-font-1{
+	font-size:2.9em;
+	padding:0% 0%;
+}
+.page-qx-top-leftmk-font-2{
+	font-size:2.2em;
+}
+.page-qx-top-leftmk-font-3{
+	font-size:1.6em;
+}
+.page-qx-top-leftmk-font-4{
+	font-size:1.5em;
+}
+.page-qx-top-leftmk-font-5{
+	font-size:1.3em;
+}
+.page-qx-top-leftmk-font-6{
+	font-size:1.2em;
+	color:#abacae;
+}
+
+.page-qx-top-rightmk-table{
+	text-align:center;
+	width:100%;
+}
+.page-qx-top-rightmk-table td{
+	padding:5% 0% 5% 0%;
+}
+.top-smimg{
+	width:50%;	
+}
+
+
+
+
+.table-1-mk{
+	margin:0% 0%;
+	padding:1% 1%;
+	min-height:650px;
+}
+/*表格标题样式*/
+.table-font-title{
+	font-size:3em;
+	color:white;
+	text-align:center;
+}
+/*表格分隔线样式*/
+.table-fengexian{
+	border-top:#abacae 1px dashed;
+	overflow:hidden;
+	hight:1px;
+	margin:1.5% 0% 1.5% 0%;
+}
+
+
+.table-farm{
+	background-color:#282c35;
+	color:white;
+	border:none;
+	font-size:1.3em;
+}
+
+.table-select-ul{
+	opacity:0.9;
+	background:#1c2027;
+	border-radius:10px;
+	padding:3% 6%;
+}
+.table-select-li{
+	text-align:right;
+	opacity:0.9;
+	background:#282c35;
+	margin:3% 0%;
+}
+.table-select-wz{
+	opacity:1;
+	color:white;
+	font-size:1.7em;
+}
+
+.table-select-li:hover{background-color:#888;}
+.table-farm:hover{background-color:white;}
+
+.table-font-sbsj{
+	padding:0% 0% 0% 2%;
+	color:white;
+	font-size:1.3em;
+}
+.table-font-date{
+	height:20%;
+	background:#282c35;
+	border:none;
+	color:white;
+	font-size:1.3em;
+}
+/*表格  中的表格*/
+.table-font-table1{
+	text-align:left;
+}
+.table-font-th1-1{
+	font-size:1.4em;
+}
+.table-font-th1-2{
+	font-size:1em;
+}
+.table-font-th1-3{
+	font-size:1.8em;
+}
+
+
+.table-font-table2{
+	text-align:left;
+}
+.table-font-th2-1{
+	font-size:1.1em;
+}
+.table-font-th2-2{
+	font-size:0.8em;
+}
+.table-font-table2 td{
+	font-size:1em;
+	color:#abacae;
+}
+/*表格   中表格分隔线样式*/
+.table-table-fengexian{
+	border-top:#abacae 1px solid;
+	overflow:hidden;
+	height:1px;
+	margin:0% 0% 1% 0%;
+}
+
+.page-buttom-mk{
+	min-height:600px;
+	min-width:80%;
+	padding:2% 5% 1% 1.5%;
+}
+.page-modal-mk{
+	min-height:80%;
+	min-width:80%;
+}
+
+
+
+
+
+
+.nc-mk{
+	margin:0% 0%;
+	padding:20% 5%;
+	color:#abacae;
+	cursor:pointer;
+}
+.nc-modal-table{
+	width:100%;
+	height:100%;
+}
+.nc-modal-table td{
+	width:20%;
+}
+.nc-modal-font1{
+	font-size:2.3em;
+}
+.nc-modal-font2{
+	font-size:1.3em;
+}
+.nc-modal-font3{
+	font-size:0.5em;
+}
+.nc-mk:hover{color:white;background:#323642;}
+
+
+
+

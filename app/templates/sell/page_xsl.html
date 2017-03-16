@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>销售量</title>
+    <link href="/static/field/bootstrap.min.css" rel="stylesheet">
+	<script src="/static/field/jquery.min.js"></script>
+	<script src="/static/field/bootstrap.min.js"></script>
+
+    
+    <link href="/static/field/page.css" rel="stylesheet">
+    <link href="/static/field/main.css" rel="stylesheet">
+    <script src="/static/field/datenl.js"></script>
+    <script src="/static/field/page.js"></script>
+    
+    <link href="/static/field/bootstrap-treeview.css" rel="stylesheet">
+    <script src="/static/field/bootstrap-treeview.js"></script>
+    
+    <script type="text/javascript" src="/static/field/                                                                                      highcharts.js"></script>
+	<script type="text/javascript" src="/static/field/highcharts-3d.js"></script>
+    
+    <link href="/static/field/list/sandbox.css" rel="stylesheet">
+    <link href="/static/field/list/drawer.min.css" rel="stylesheet">
+	<script src="/static/field/list/iscroll.min.js"></script>
+	<script src="/static/field/list/drawer.min.js" charset="utf-8"></script>
+
+<script>
+    $(document).ready(function() {
+      $('.drawer').drawer();
+    });
+</script>
+<script type="text/javascript">
+	document.onmousemove=function(e)
+	{
+		if(e.screenX==0)
+			$('#showlist').click();
+	}
+	function aaa(event)
+	{
+		var div=document.getElementById("test");
+		var x=event.clientX;
+		var divx=div.offsetWidth;
+		if(x>divx)
+			$('#showlist').click();
+	}
+	
+	window.onload=function()
+	{
+		document.getElementById("daterq").innerHTML=showDate();
+		Mk_Xs("xsl");
+		
+		var data=[323.0,125.0,293.0,76.0,189.0,189.0,245.1,65.7,52.1,156.0,0.0];
+		var xdata=['北京','上海','广州','成都','云南','扬州','惠州','山东','长沙','深圳包装厂','坝上'];
+		LoadSlt('xsl',xdata,data);
+	}
+	$(document).ready(function(){
+		var options={
+			levels: 5,
+			color:'white',
+			backColor:'#1f2229',
+			showBorder:false,
+			onhoverColor:'#666666',
+			data: buildDomTree(),
+			onNodeSelected:function(event,node){
+              alert("选择了:"+node.text);
+            },
+			onNodeExpanded:function(event,node){
+              //alert("展开了:"+node.text);
+            }
+        };
+		$('#treeview').treeview(options);
+	});
+	
+	function buildDomTree()
+	{
+		var defaultData=[{text:'主页',nodes:[
+			{text:'采收量'},
+			{text:'损耗'},
+			{text:'物流'},
+			{text:'管控'},
+			{text:'气象'}
+		]}];
+        return defaultData;
+	}
+	function Fxlx(type)
+	{
+		alert(type);
+	}
+	function Xsllx(type)
+	{
+		Mk_Xs(type);
+		var data=[10.0,20.0,30.0,40.0,50.0,60.0,70.0,80.0,90.0,100.0,90.0];
+		var xdata=['北京','上海','广州','成都','云南','扬州','惠州','山东','长沙','深圳包装厂','坝上'];
+		LoadSlt('xsl',xdata,data);
+	}
+</script>
+</head>
+<body>
+<div class="drawer drawer--left">
+  <header role="banner">
+    <button type="button" class="drawer-toggle" style="background:transparent;color:white; display:none;" id="showlist"></button>
+    <!--<button type="button" class="drawer-toggle drawer-hamburger" style="background:white;">>></button>-->
+    <div class="drawer-nav" role="navigation" id="test" style="opacity:0.98; background:#1f2229; padding:0px 0px;" onMouseOut="aaa(event);">
+		<div id="treeview" style="color:white;"></div>
+    </div>
+  </header>
+</div>
+<br>
+<div>
+	<div class="div-title">
+        <table style="width:100%;"><tr>
+            <td style="min-width:50%;text-align:left;"><img src="/static/images/logo.png" class="logo"/></td>
+            <td style="min-width:50%;text-align:right;"><span class="div-title-right" id="daterq"></span></td></tr>
+        </table>
+    </div>
+    <div class="div-mk page-1-topmk" id="div_xsl">
+    	<table class="page-1-topmk-table"><tr>
+    	<td>
+        	<span class="page-1-top-leftmk-font-1">销售量</span>
+            <span class="page-1-top-leftmk-font-2">(Kg)</span>
+            <img src="/static/images/blue.png" class="bigimg"/>
+        	<br>
+        	<span class="page-1-top-leftmk-font-3">4528.0</span>
+        </td>
+        <td style="padding:0% 3% 0% 5%;">
+        	<div class="fengexian1"></div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Xsllx('kgl');">
+        	<span class="page-1-top-rightmk-font-1">可供量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/blue.png" class="midimg1"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">6820.0</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Xsllx('dbl');">
+        	<span class="page-1-top-rightmk-font-1">调拨量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/orage.png" class="midimg1"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">820.0</span>
+        </div>
+        </td>
+        <td style="width:28%;"></td>
+        </tr></table>
+    </div>
+    <div class="div-mk page-1-topmk" id="div_kgl">
+    	<table class="page-1-topmk-table"><tr>
+    	<td>
+        	<span class="page-1-top-leftmk-font-1">可供量</span>
+            <span class="page-1-top-leftmk-font-2">(Kg)</span>
+            <img src="/static/images/blue.png" class="bigimg"/>
+        	<br>
+        	<span class="page-1-top-leftmk-font-3">6820.0</span>
+        </td>
+        <td style="padding:0% 3% 0% 5%;">
+        	<div class="fengexian1"></div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Xsllx('xsl');">
+        	<span class="page-1-top-rightmk-font-1">销售量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/blue.png" class="midimg1"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">4528.0</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Xsllx('dbl');">
+        	<span class="page-1-top-rightmk-font-1">调拨量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/orage.png" class="midimg1"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">820.0</span>
+        </div>
+        </td>
+        <td style="width:28%;"></td>
+        </tr></table>
+    </div>
+    <div class="div-mk page-1-topmk" id="div_dbl">
+    	<table class="page-1-topmk-table"><tr>
+    	<td>
+        	<span class="page-1-top-leftmk-font-1">调拨量</span>
+            <span class="page-1-top-leftmk-font-2">(Kg)</span>
+            <img src="/static/images/blue.png" class="bigimg"/>
+        	<br>
+        	<span class="page-1-top-leftmk-font-3">820.0</span>
+        </td>
+        <td style="padding:0% 3% 0% 5%;">
+        	<div class="fengexian1"></div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Xsllx('xsl');">
+        	<span class="page-1-top-rightmk-font-1">销售量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/blue.png" class="midimg1"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">4528.0</span>
+        </div>
+        </td>
+        <td>
+        <div style="cursor:pointer;" onClick="Xsllx('kgl');">
+        	<span class="page-1-top-rightmk-font-1">可供量</span>
+            <span class="page-1-top-rightmk-font-2">(Kg)</span>
+            <img src="/static/images/orage.png" class="midimg1"/>
+        	<br>
+        	<span class="page-1-top-rightmk-font-3">6820.0</span>
+        </div>
+        </td>
+        <td style="width:28%;"></td>
+        </tr></table>
+    </div>
+    <br>
+    <div class="div-mk page-1-topmk">
+        <table width="100%"><tr>
+            <td width="25%">
+                <span class="page-1-top-rightmk-font-1" id="span_name"></span>
+                <span class="page-1-top-rightmk-font-2">(Kg)</span>
+                <img src="/static/images/blue.png" class="midimg"/><br>
+                <span class="page-1-top-rightmk-font-3" id="span_number"></span>
+        	</td>
+            <td style="width:40%;">
+            </td>
+            <td>
+                <div class="page-1-smalldiv" type="button" onClick="Fxlx(this.innerHTML);">月分析</div>
+            </td>
+            <td>
+            	<div class="page-1-smalldiv" type="button" onClick="Fxlx(this.innerHTML);">周分析</div>
+            </td>
+            <td>
+            	<div class="page-1-smalldiv" type="button" onClick="Fxlx(this.innerHTML);">日分析</div>
+            </td>
+        </tr></table>
+        <br>
+        <div class="page-buttom-mk" id="container1"></div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" style="width:90%;">
+    <div class="modal-content div-mk">
+      <div class="modal-body">
+        <div class="page-modal-mk" id="container2"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-primary" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="banquan">
+	<br>Copyright © 2015 Beijing Guanghua5 Network Technology Co., Ltd. All Rights Reserved. 北京光华路五号网络科技有限公司 版权所有
+</div>
+</body>
+</html>

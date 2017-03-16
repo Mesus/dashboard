@@ -1,0 +1,117 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>溯源网络</title>
+
+    <style type="text/css">
+        html, body {
+            font: 10pt arial;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+
+    </script><script type="text/javascript" src="/static/vis/vis.min.js"></script>
+    <link href="/static/vis/vis.min.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript">
+        var nodes = null;
+        var edges = null;
+        var network = null;
+
+        var LENGTH_MAIN = 350,
+                LENGTH_SERVER = 150,
+                LENGTH_SUB = 50,
+                WIDTH_SCALE = 2,
+                GREEN = 'green',
+                RED = '#C5000B',
+                ORANGE = 'orange',
+        //GRAY = '#666666',
+                GRAY = 'gray',
+                BLACK = '#2B1B17';
+
+        // Called when the Visualization API is loaded.
+        function draw() {
+            // Create a data table with nodes.
+            nodes = [];
+
+            // Create a data table with links.
+            edges = [];
+
+            {{code|safe}}
+
+
+
+            // legend
+            var mynetwork = document.getElementById('mynetwork');
+            var x = - mynetwork.clientWidth / 2 + 50;
+            var y = - mynetwork.clientHeight / 2 + 50;
+            var step = 60;
+            <!--nodes.push({id: 1000, x: x, y: y, label: '{{g1}}', group: 'g1', value: 1, fixed: true, physics:false});-->
+            <!--nodes.push({id: 1001, x: x, y: y + 3 * step, label: '{{g2}}', group: 'g2', value: 1, fixed: true,  physics:false});-->
+            <!--nodes.push({id: 1002, x: x, y: y + 5 * step, label: '{{g3}}', group: 'g3', value: 1, fixed: true,  physics:false});-->
+            <!--nodes.push({id: 1003, x: x, y: y + 7 * step, label: '{{g4}}', group: 'g4', value: 1, fixed: true,  physics:false});-->
+            <!--nodes.push({id: 1004, x: x, y: y + 9 * step, label: '{{g5}}', group: 'g5', value: 1, fixed: true,  physics:false});-->
+
+            // create a network
+            var container = document.getElementById('mynetwork');
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+            var options = {
+                nodes: {
+                    scaling: {
+                        min: 16,
+                        max: 32
+                    }
+                },
+                edges: {
+                    color: GRAY,
+                    smooth: false
+                },
+                physics:{
+                    barnesHut:{gravitationalConstant:-30000},
+                    stabilization: {iterations:2500}
+                },
+                groups: {
+                    g1: {
+                        shape: 'triangle',
+                        color: '#FF9900' // orange
+                    },
+                    g2: {
+                        shape: 'dot',
+                        color: "#2B7CE9" // blue
+                    },
+                    g3: {
+                        shape: 'diamond',
+                        color: "#5A1E5C" // purple
+                    },
+                    g4: {
+                        shape: 'square',
+                        color: "#C5000B" // red
+                    },
+                    g5: {
+                        shape: 'star',
+                        color: "#109618" // green
+                    }
+                }
+            };
+            network = new vis.Network(container, data, options);
+        }
+    </script>
+</head>
+
+<body onload="draw()">
+
+<div id="mynetwork"><div class="vis-network" tabindex="900" style="position: relative; overflow: hidden; touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); width: 100%; height: 100%;"><canvas width="1362" height="990" style="position: relative; touch-action: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); width: 100%; height: 100%;"></canvas></div></div>
+
+
+
+</body><div></div></html>

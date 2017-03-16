@@ -1,0 +1,208 @@
+[
+    {
+        "imports": [
+            "子", 
+            "戌"
+        ], 
+        "name": "甲", 
+        "size": 1
+    }, 
+    {
+        "imports": [
+            "丑", 
+            "亥"
+        ], 
+        "name": "乙", 
+        "size": 2
+    }, 
+    {
+        "imports": [
+            "寅", 
+            "子"
+        ], 
+        "name": "丙", 
+        "size": 3
+    }, 
+    {
+        "imports": [
+            "卯", 
+            "丑"
+        ], 
+        "name": "丁", 
+        "size": 4
+    }, 
+    {
+        "imports": [
+            "辰", 
+            "寅"
+        ], 
+        "name": "戊", 
+        "size": 5
+    }, 
+    {
+        "imports": [
+            "巳", 
+            "卯"
+        ], 
+        "name": "己", 
+        "size": 6
+    }, 
+    {
+        "imports": [
+            "午", 
+            "辰"
+        ], 
+        "name": "庚", 
+        "size": 7
+    }, 
+    {
+        "imports": [
+            "未", 
+            "己"
+        ], 
+        "name": "辛", 
+        "size": 8
+    }, 
+    {
+        "imports": [
+            "申", 
+            "午"
+        ], 
+        "name": "壬", 
+        "size": 9
+    }, 
+    {
+        "imports": [
+            "酉", 
+            "未"
+        ], 
+        "name": "癸", 
+        "size": 10
+    }, 
+    {
+        "imports": [
+            "戌"
+        ], 
+        "name": "子", 
+        "size": 11
+    }, 
+    {
+        "imports": [
+            "乙"
+        ], 
+        "name": "戌", 
+        "size": 12
+    }, 
+    {
+        "imports": [
+            "亥"
+        ], 
+        "name": "丑", 
+        "size": 13
+    }, 
+    {
+        "imports": [
+            "丙"
+        ], 
+        "name": "亥", 
+        "size": 14
+    }, 
+    {
+        "imports": [
+            "子"
+        ], 
+        "name": "寅", 
+        "size": 15
+    }, 
+    {
+        "imports": [
+            "丁"
+        ], 
+        "name": "子", 
+        "size": 16
+    }, 
+    {
+        "imports": [
+            "丑"
+        ], 
+        "name": "卯", 
+        "size": 17
+    }, 
+    {
+        "imports": [
+            "戊"
+        ], 
+        "name": "丑", 
+        "size": 18
+    }, 
+    {
+        "imports": [
+            "寅"
+        ], 
+        "name": "辰", 
+        "size": 19
+    }, 
+    {
+        "imports": [
+            "己"
+        ], 
+        "name": "寅", 
+        "size": 20
+    }, 
+    {
+        "imports": [
+            "卯"
+        ], 
+        "name": "巳", 
+        "size": 21
+    }, 
+    {
+        "imports": [
+            "辰"
+        ], 
+        "name": "午", 
+        "size": 22
+    }, 
+    {
+        "imports": [
+            "辛"
+        ], 
+        "name": "辰", 
+        "size": 23
+    }, 
+    {
+        "imports": [
+            "己"
+        ], 
+        "name": "未", 
+        "size": 24
+    }, 
+    {
+        "imports": [
+            "壬"
+        ], 
+        "name": "己", 
+        "size": 25
+    }, 
+    {
+        "imports": [
+            "午"
+        ], 
+        "name": "申", 
+        "size": 26
+    }, 
+    {
+        "imports": [
+            "癸"
+        ], 
+        "name": "午", 
+        "size": 27
+    }, 
+    {
+        "imports": [
+            "未"
+        ], 
+        "name": "酉", 
+        "size": 28
+    }
+]

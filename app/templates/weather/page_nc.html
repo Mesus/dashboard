@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>气象</title>
+    <link href="/static/field/list/sandbox.css" rel="stylesheet">
+    <link href="/static/field/list/drawer.min.css" rel="stylesheet">
+    <link href="/static/field/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/field/jquery.min.js"></script>
+    <script src="/static/field/bootstrap.min.js"></script>
+    <link href="/static/field/page.css" rel="stylesheet">
+    <link href="/static/field/main.css" rel="stylesheet">
+    <script src="/static/field/datenl.js"></script>
+    <script src="/static/field/page.js"></script>
+    <link href="/static/field/bootstrap-treeview.css" rel="stylesheet">
+    <script src="/static/field/bootstrap-treeview.js"></script>
+    <script src="/static/field/list/iscroll.min.js"></script>
+    <script src="/static/field/list/drawer.min.js" charset="utf-8"></script>
+    <script>
+    $(document).ready(function() {
+        $('.drawer').drawer();
+    });
+    </script>
+    <script type="text/javascript">
+    document.onmousemove = function(e) {
+        if (e.screenX == 0)
+            $('#showlist').click();
+    }
+
+    function aaa(event) {
+        var div = document.getElementById("test");
+        var x = event.clientX;
+        var divx = div.offsetWidth;
+        if (x > divx)
+            $('#showlist').click();
+    }
+
+    window.onload = function() {
+        document.getElementById("daterq").innerHTML = showDate();
+
+    }
+    $(document).ready(function() {
+        var options = {
+            levels: 5,
+            color: 'white',
+            backColor: '#1f2229',
+            showBorder: false,
+            onhoverColor: '#666666',
+            data: buildDomTree(),
+            onNodeSelected: function(event, node) {
+                alert("选择了:" + node.text);
+            },
+            onNodeExpanded: function(event, node) {
+                //alert("展开了:"+node.text);
+            }
+        };
+        $('#treeview').treeview(options);
+        $('.div-mk').click(function() {
+            <!--var hh = $(this).find('input').val();-->
+            <!--console.log(hh);-->
+
+            <!--var p_time = getQueryString("time");-->
+            <!--window.location.href = '/weather_detail/'+hh+"/"+p_time;-->
+        });
+    });
+
+    function buildDomTree() {
+        var defaultData = [{
+            text: '主页',
+            nodes: [{
+                text: '采收量'
+            }, {
+                text: '销售量'
+            }, {
+                text: '损耗'
+            }, {
+                text: '物流'
+            }, {
+                text: '管控'
+            }]
+        }];
+        return defaultData;
+    }
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+    </script>
+</head>
+
+<body>
+    <br>
+    <div class="drawer drawer--left">
+        <header role="banner">
+            <button type="button" class="drawer-toggle" style="background:transparent;color:white; display:none;" id="showlist"></button>
+            <div class="drawer-nav" role="navigation" id="test" style="opacity:0.98; background:#1f2229; padding:0px 0px;" onMouseOut="aaa(event);">
+                <div id="treeview" style="color:white;"></div>
+            </div>
+        </header>
+    </div>
+    <div class="main">
+        <div class="div-title">
+            <table style="width:100%;">
+                <tr>
+                    <td style="min-width:50%;text-align:left;"><img src="/static/images/logo.png" class="logo" /></td>
+                    <td style="min-width:50%;text-align:right;"><span class="div-title-right" id="daterq"></span></td>
+                </tr>
+            </table>
+        </div>
+        <table class="nc-modal-table">
+            <tr>
+                <td>
+                    <div class="div-mk nc-mk">
+                        <input type="hidden" value="{{c0_desc}}"/>
+                        <div class="nc-modal-font1">{{c0_name}}</div>
+                        <br>
+                        <div style="text-align:center;"><img id="img_weather" src="/static/images/weather/{{c0_icon}}" class="top-smimg" /></div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c0_qx}}</span></td>
+                                <td><span class="nc-modal-font2">{{c0_fl}}</span></td>
+                            </tr>
+                            <tr>
+                                <td class="nc-modal-font3">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c0_wd}}℃</span></td>
+                                <td><span class="nc-modal-font2">{{c0_fx}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-mk nc-mk">
+                        <input type="hidden" value="{{c1_desc}}"/>
+                        <div class="nc-modal-font1">{{c1_name}}</div>
+                        <br>
+                        <div style="text-align:center;"><img id="img_weather" src="/static/images/weather/{{c1_icon}}" class="top-smimg" /></div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c1_qx}}</span></td>
+                                <td><span class="nc-modal-font2">{{c1_fl}}</span></td>
+                            </tr>
+                            <tr>
+                                <td class="nc-modal-font3">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c1_wd}}℃</span></td>
+                                <td><span class="nc-modal-font2">{{c1_fx}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-mk nc-mk">
+                        <input type="hidden" value="{{c2_desc}}"/>
+                        <div class="nc-modal-font1">{{c2_name}}</div>
+                        <br>
+                        <div style="text-align:center;"><img id="img_weather" src="/static/images/weather/{{c2_icon}}" class="top-smimg" /></div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c2_qx}}</span></td>
+                                <td><span class="nc-modal-font2">{{c2_fl}}</span></td>
+                            </tr>
+                            <tr>
+                                <td class="nc-modal-font3">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c2_wd}}℃</span></td>
+                                <td><span class="nc-modal-font2">{{c2_fx}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-mk nc-mk">
+                        <input type="hidden" value="{{c3_desc}}"/>                    
+                        <div class="nc-modal-font1">{{c3_name}}</div>
+                        <br>
+                        <div style="text-align:center;"><img id="img_weather" src="/static/images/weather/{{c3_icon}}" class="top-smimg" /></div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c3_qx}}</span></td>
+                                <td><span class="nc-modal-font2">{{c3_fl}}</span></td>
+                            </tr>
+                            <tr>
+                                <td class="nc-modal-font3">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c3_wd}}℃</span></td>
+                                <td><span class="nc-modal-font2">{{c3_fx}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-mk nc-mk">
+                        <input type="hidden" value="{{c4_desc}}"/>                    
+                        <div class="nc-modal-font1">{{c4_name}}</div>
+                        <br>
+                        <div style="text-align:center;"><img id="img_weather" src="/static/images/weather/{{c4_icon}}" class="top-smimg" /></div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c4_qx}}</span></td>
+                                <td><span class="nc-modal-font2">{{c4_fl}}</span></td>
+                            </tr>
+                            <tr>
+                                <td class="nc-modal-font3">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c4_wd}}℃</span></td>
+                                <td><span class="nc-modal-font2">{{c4_fx}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="div-mk nc-mk">
+                        <input type="hidden" value="{{c5_desc}}"/>                    
+                        <div class="nc-modal-font1">{{c5_name}}</div>
+                        <br>
+                        <div style="text-align:center;"><img id="img_weather" src="/static/images/weather/{{c5_icon}}" class="top-smimg" /></div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c5_qx}}</span></td>
+                                <td><span class="nc-modal-font2">{{c5_fl}}</span></td>
+                            </tr>
+                            <tr>
+                                <td class="nc-modal-font3">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c5_wd}}℃</span></td>
+                                <td><span class="nc-modal-font2">{{c5_fx}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-mk nc-mk">
+                        <input type="hidden" value="{{c6_desc}}"/>                    
+                        <div class="nc-modal-font1">{{c6_name}}</div>
+                        <br>
+                        <div style="text-align:center;"><img id="img_weather" src="/static/images/weather/{{c6_icon}}" class="top-smimg" /></div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c6_qx}}</span></td>
+                                <td><span class="nc-modal-font2">{{c6_fl}}</span></td>
+                            </tr>
+                            <tr>
+                                <td class="nc-modal-font3">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c6_wd}}℃</span></td>
+                                <td><span class="nc-modal-font2">{{c6_fx}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-mk nc-mk">
+                        <input type="hidden" value="{{c7_desc}}"/>                    
+                        <div class="nc-modal-font1">{{c7_name}}</div>
+                        <br>
+                        <div style="text-align:center;"><img id="img_weather" src="/static/images/weather/{{c7_icon}}" class="top-smimg" /></div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c7_qx}}</span></td>
+                                <td><span class="nc-modal-font2">{{c7_fl}}</span></td>
+                            </tr>
+                            <tr>
+                                <td class="nc-modal-font3">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c7_wd}}℃</span></td>
+                                <td><span class="nc-modal-font2">{{c7_fx}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-mk nc-mk">
+                        <input type="hidden" value="{{c8_desc}}"/>                    
+                        <div class="nc-modal-font1">{{c8_name}}</div>
+                        <br>
+                        <div style="text-align:center;"><img id="img_weather" src="/static/images/weather/{{c8_icon}}" class="top-smimg" /></div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c8_qx}}</span></td>
+                                <td><span class="nc-modal-font2">{{c8_fl}}</span></td>
+                            </tr>
+                            <tr>
+                                <td class="nc-modal-font3">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c8_wd}}℃</span></td>
+                                <td><span class="nc-modal-font2">{{c8_fx}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-mk nc-mk">
+                        <input type="hidden" value="{{c9_desc}}"/>                    
+                        <div class="nc-modal-font1">{{c9_name}}</div>
+                        <br>
+                        <div style="text-align:center;"><img id="img_weather" src="/static/images/weather/{{c9_icon}}" class="top-smimg" /></div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c9_qx}}</span></td>
+                                <td><span class="nc-modal-font2">{{c9_fl}}</span></td>
+                            </tr>
+                            <tr>
+                                <td class="nc-modal-font3">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="nc-modal-font2">{{c9_wd}}℃</span></td>
+                                <td><span class="nc-modal-font2">{{c9_fx}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="banquan">
+        <br>Copyright © 2015 Beijing Guanghua5 Network Technology Co., Ltd. All Rights Reserved. 北京光华路五号网络科技有限公司 版权所有
+    </div>
+</body>
+
+</html>
